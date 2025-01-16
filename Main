@@ -1,0 +1,117 @@
+package myTodo;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    static Scanner scanner = new Scanner(System.in);
+     static List<To> todo = new ArrayList<To>();
+	public static void main(String[] args) throws ParseException {
+		int option;
+		do {
+			System.out.println("list all task");
+			System.out.println("add a task");
+			System.out.println("view a task");
+			System.out.println("update a task");
+			System.out.println("delete a task");
+			System.out.println("enter the option");
+			option = scanner.nextInt();
+			if(option == 1) {
+				//list all task
+				listAllTask();
+			}
+			else if(option == 2) {
+				//add a task
+				addTask();
+			}
+			else if (option == 3) {
+				//view a task
+				listAllTask();
+				viewTask();
+			}
+			else if(option == 4) {
+				//update a task
+				updateTask();
+			}
+			else if (option == 5) {
+				//delete a task
+				deleteTask();
+			}
+			else {
+				System.out.println("invalid option entered");
+			}
+		}while(option >=1 && option <= 5);
+	}
+		static void deleteTask() {
+			System.out.println("enter the option");
+			int no = scanner.nextInt();
+			for(To t :todo ) {
+				if(t.getTaskId() ==no ) {
+				todo.remove(no);
+				return;
+				}
+			}
+		}
+		
+		static void updateTask() {
+			System.out.println("enter the option");
+			int no = scanner.nextInt();
+			for(To t : todo) {
+				if(t.getTaskId() == no) {
+				System.out.println("enter the task status");
+				String status = scanner.next();
+	            t.setStatus(status);
+	            return;
+				}		
+				}
+		}
+		
+		static void viewTask() {
+			System.out.println("enter the option");
+			int no = scanner.nextInt();
+			for(To t : todo) {
+				if(t.getTaskId() == no) {
+					System.out.println("descrption" + "\t" + t.getDescription() + "\t" + t.getSummary() +"\t"+ t.getDeadline() +"\t" + t.getStatus());
+					return;
+				}
+			}
+		}
+		
+		static void addTask() throws ParseException {
+			System.out.println("enter the description");
+			String summary = scanner.nextLine();
+			scanner.nextLine();
+			
+			System.out.println("enter the summary");
+			String description = scanner.nextLine();
+			
+			System.out.println("enter the date");
+			String date = scanner.nextLine();
+			
+			
+			To to = new To(summary,description,date);
+			todo.add(to);
+		}
+		
+		static void listAllTask() {
+			for(To t : todo) {
+				System.out.println(t.getSummary() +"\t"+ t.getDescription() +"\t"+ t.getDeadline() +"\t"+ t.getStatus());
+			}
+			
+			
+			
+			
+			
+			
+			
+		
+		
+		
+		
+		
+      
+	}
+
+}
